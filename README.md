@@ -12,6 +12,10 @@ Running the application is only possible from the root directory
   meirgabay@~/python-project $ python main.py
   Inesrt your name: meir
   Hello meir
+
+  meirgabay@~/python-project $ python -m main
+  Inesrt your name: willy
+  Hello willy
   ```
 
 - `app.py`
@@ -31,6 +35,10 @@ Running the application is only possible from the root directory
   ```
 
 ## Troubleshooting
+
+### \_\_init\_\_.py
+
+In previous versions of Python, you had to create a `__init__.py` file in each folder that you want to import as a package. From version 3.3+ it is not required anymore - [Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/)
 
 ### ModuleNotFoundError
 
