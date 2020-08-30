@@ -1,11 +1,11 @@
-from ..utils.greet import greet
+from ..utils import message
 
 
 def main():
-    name = input("Inesrt your name: ")
-    greet(name)
+    name = input("Insert your name: ")
+    message.greet(name)
 
 
 if __name__ == "__main__":
-    print("I'm in src > app > app.py")
+    message.script_path(__file__)
     main()
