@@ -13,6 +13,7 @@ Running the application is only possible from the root directory
   Inesrt your name: meir
   Hello meir
 
+
   meirgabay@~/python-project $ python -m main
   Inesrt your name: willy
   Hello willy
@@ -25,6 +26,13 @@ Running the application is only possible from the root directory
   I'm in src > app > app.py
   Inesrt your name: willy
   Hello willy
+
+  # Relative import to utils, results in an error
+  meirgabay@~/python-project $ python src/app/app.py
+  Traceback (most recent call last):
+  File "src/app/app.py", line 1, in <module>
+    from ..utils.greet import greet
+  ImportError: attempted relative import with no known parent package
   ```
 
 - `greet.py`
@@ -32,13 +40,17 @@ Running the application is only possible from the root directory
   ```
   meirgabay@~/python-project $ python -m src.utils.greet
   I'm in src > utils > greet.py
+
+  # Doesn't import anything, so no errors
+  meirgabay@~/python-project $ python src/utils/greet.py
+  I'm in src > utils > greet.py
   ```
 
 ## Troubleshooting
 
 ### \_\_init\_\_.py
 
-In previous versions of Python, you had to create a `__init__.py` file in each folder that you want to import as a package. From version 3.3+ it is not required anymore - [Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/)
+In previous versions of Python, you had to create the `__init__.py` file in each folder that you want to import as a package. From version 3.3+ it is not required anymore - [Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/)
 
 ### ModuleNotFoundError
 
