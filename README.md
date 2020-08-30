@@ -83,3 +83,7 @@ It doesn't happen when you invoke `greet.py`, since it doesn't import anything
 meirgabay@~/python-project/src $ python -m utils.greet
 I'm in src > utils > greet.py
 ```
+
+### pylint - Attempted relative import beyond top-level packagepylint(relative-beyond-top-level)
+
+Yup, pylint says it's an error (VSCode extension), though flake8 is fine with it. I prefer using flake8 as my linter.
