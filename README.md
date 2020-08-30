@@ -1,6 +1,6 @@
 # python-project
 
-Python project structure, relative imports, absolute imports, packages and modules. Let's make it simpler.
+Python project structure, relative imports, absolute imports, packages, and modules. Let's make it simpler.
 
 ## Getting Started
 
