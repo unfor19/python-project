@@ -149,8 +149,13 @@ Executing modules from the project's root directory (top-level package)
 
 ### Where can I find a well-structured Python project?
 
+- [sampleproject](https://github.com/pypa/sampleproject) - the official Python sample project
 - [Django](https://github.com/django/django) - a complex Python project
 - [requests](https://github.com/psf/requests) - a non-complex Python project
+
+## Final words
+
+I hope that this blog post helped you in understanding how to create a well-structured Python project, and if it did, then Heart, Clap, Star and share!
 
 ## Authors
 
