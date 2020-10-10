@@ -6,7 +6,7 @@ Python project structure, relative imports, absolute imports, packages, and modu
 
 Executing modules from the project's root directory (top-level package)
 
-- `main.py`
+- [main.py](./main.py)
 
   ```bash
   meirgabay@~/python-project (master)$ python main.py
@@ -15,48 +15,48 @@ Executing modules from the project's root directory (top-level package)
   Hello willy
 
 
-  meirgabay@~/python-project (master)$ python -m main
-  My Path: python-project/main.py
+  meirgabay@~/python-project (master)$ python -m appy
+  My Path: python-project/appy/__main__.py
   Insert your name: willy
   Hello willy
   ```
 
-- `app.py`
+- [appy/core/app.py](./appy/core/app.py)
 
   ```bash
   # Contains relative imports - `..utils.message`
-  meirgabay@~/python-project (master)$ python src/app/app.py
+  meirgabay@~/python-project (master)$ python appy/core/app.py
   Traceback (most recent call last):
-    File "src/app/app.py", line 1, in <module>
+    File "appy/core/app.py", line 1, in <module>
       from ..utils import message
   ImportError: attempted relative import with no known parent package
 
 
-  meirgabay@~/python-project (master)$ python -m src.app.app
-  My Path: python-project/src/app/app.py
+  meirgabay@~/python-project (master)$ python -m appy.core.app
+  My Path: python-project/appy/core/app.py
   Insert your name: willy
   Hello willy
   ```
 
-- `message.py`
+- [appy/utils/message.py](./appy/utils/message.py)
 
   ```bash
   # Doesn't contain relative imports, so no exceptions were raised
-  meirgabay@~/python-project (master)$ python src/utils/message.py
-  My Path: python-project/src/utils/message.py
+  meirgabay@~/python-project (master)$ python appy/utils/message.py
+  My Path: python-project/appy/utils/message.py
 
-
-  meirgabay@~/python-project (master)$ python -m src.utils.message
-  My Path: python-project/src/utils/message.py
+  meirgabay@~/python-project (master)$ python -m appy.utils.message
+  My Path: python-project/appy/utils/message.py
   ```
 
 ## Questions and Answers (Q&A)
 
-### Project, Packages and Modules, what are they?
+### Project, Packages, Modules and Scripts, what are they?
 
 - Project - a directory, also known as the top-level package, which contains packages and modules
 - Package (in a project) - a directory which contains modules and/or packages (sub-directories)
-- Module - a Python script (`.py`) which can be exected from the terminal, or imported with `import` and `from`
+- Script - a Python script (`.py`) which can be exected from the terminal
+- Module - a Python script (`.py`) which can be imported with `import` and `from`
 
 ### What about Packages which are not part of a project?
 
@@ -65,7 +65,7 @@ Executing modules from the project's root directory (top-level package)
 
 ### How do I import Packages and Modules that I've created?
 
-- Python project's packages and modules can be imported with **relative paths** from any module which is **part of the same project**. An example is available in [src/app/app.py](https://github.com/unfor19/python-project/blob/master/src/app/app.py#L1)
+- Python project's packages and modules can be imported with **relative paths** from any module which is **part of the same project**. An example is available in [appy/core/app.py](https://github.com/unfor19/python-project/blob/master/appy/core/app.py#L1)
 
 - If you intend to import a package or a module which is **not part of the same project**, you'll have to use **absolute paths**. This can be done with [importlib](https://docs.python.org/3/library/importlib.html), see this [StackOverflow answer](https://stackoverflow.com/questions/67631/how-to-import-a-module-given-the-full-path).
 
@@ -85,52 +85,52 @@ Executing modules from the project's root directory (top-level package)
 
 - Short answer - **it depends**
 
-- Trying to invoke a function from the terminal, such as `src.app.app.main()`, will raise the ModuleNotFound exception. A package must be imported **before** invoking one of its functions.
+- Trying to invoke a function from the terminal, such as `appy.core.app.main()`, will raise the ModuleNotFound exception. A package must be imported **before** invoking one of its functions.
 
   ```bash
-  meirgabay@~/python-project (master)$ python -m src.app.app.main
-  /Users/meirgabay/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/bin/python: Error while finding module specification for 'src.app.app.main' (ModuleNotFoundError: __path__ attribute not found on 'src.app.app' while trying to find 'src.app.app.main')
+  meirgabay@~/python-project (master)$ python -m appy.core.app.main
+  /Users/meirgabay/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/bin/python: Error while finding module specification for 'appy.core.app.main' (ModuleNotFoundError: __path__ attribute not found on 'appy.core.app' while trying to find 'appy.core.app.main')
   ```
 
-- Since you can't invoke `main()` directly from the terminal, calling it from the `if __main__` block enables executing it from the terminal. It's possible to pass arguments, but it's a bit ugly, [read the docs](https://docs.python.org/3/using/cmdline.html) to learn how. The following example attempts to execute the module `src.app.app`, which in turn call its `if __main__` block
+- Since you can't invoke `main()` directly from the terminal, calling it from the `if __main__` block enables executing it from the terminal. It's possible to pass arguments, but it's a bit ugly, [read the docs](https://docs.python.org/3/using/cmdline.html) to learn how. The following example attempts to execute the module `appy.core.app`, which in turn call its `if __main__` block
 
   ```bash
-  meirgabay@~/python-project (master)$ python -m src.app.app
-  My Path: python-project/src/app/app.py
+  meirgabay@~/python-project (master)$ python -m appy.core.app
+  My Path: python-project/appy/core/app.py
   Insert your name: willy
   Hello willy
   ```
 
-- Executing a module which contains relative imports, while the `PWD` is a subdirectory of the project, such as `python-project/src`, will raise the exception below. Remember, your `PWD` should always be the project's root directory, in this case it's `python-project`.
+- If the `PWD` is a subdirectory of the project, such as `python-project/appy`, an attempt to execute a module which contains relative imports, will raise the exception below. Remember, your `PWD` should always be the project's root directory, in this case it's `python-project`.
 
   ```bash
-  # We're in `src`
-  meirgabay@~/python-project/src (master)$ python -m app.app
+  # PWD is `appy`
+  meirgabay@~/python-project/appy (master)$ python -m core.app
 
   Traceback (most recent call last):
     File "/Users/meirgabay/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/lib/python3.8/runpy.py", line 193, in _run_module_as_main
       return _run_code(code, main_globals, None,
     File "/Users/meirgabay/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/lib/python3.8/runpy.py", line 86, in _run_code
       exec(code, run_globals)
-    File "/Users/meirgabay/python-project/src/app/app.py", line 1, in <module>
+    File "/Users/meirgabay/python-project/appy/core/app.py", line 1, in <module>
       from ..utils import message
   ValueError: attempted relative import beyond top-level package
   ```
 
-- It doesn't happen when invoking `message`, since it doesn't use relative imports
+- It doesn't happen when invoking `message`, since `message` doesn't use relative imports
 
   ```bash
-  meirgabay@~/python-project/src (master)$ python utils/message.py
-  My Path: python-project/src/utils/message.py
+  meirgabay@~/python-project/appy (master)$ python utils/message.py
+  My Path: python-project/appy/utils/message.py
 
 
-  meirgabay@~/python-project/src (master)$ python -m utils.message
-  My Path: python-project/src/utils/message.py
+  meirgabay@~/python-project/appy (master)$ python -m utils.message
+  My Path: python-project/appy/utils/message.py
   ```
 
 - Invoking a function from the terminal is also possible by using the `-c` flag. Surprise, it's possible to pass arguments in a more intuitive way, for example `app.main(my_arg1, my_arg2)`
   ```bash
-  meirgabay@~/python-project (master)$ python -c "import src.app.app as app; app.main()"
+  meirgabay@~/python-project (master)$ python -c "import appy.core.app as app; app.main()"
   Insert your name: willy
   Hello willy
   ```
@@ -139,6 +139,106 @@ Executing modules from the project's root directory (top-level package)
 
 - Read the docs - [using cmdline](https://docs.python.org/3/using/cmdline.html)
 - In this tutorial, we used both `-c` and `-m` flags
+
+### Why is it possible to execute `python -m appy`?
+
+The [appy/\_\_main\_\_.py](./appy/__main__.py) file acts like the `if __main__` code snippet, but on packages. This enables the `appy` package to be executed with `python -m` or with [runpy](https://docs.python.org/3/library/runpy.html)
+
+```bash
+meirgabay@~/python-project (master)$ python -m appy
+My Path: python-project/appy/__main__.py
+Insert your name: willy
+Hello willy
+```
+
+### What's `runpy` and why do you use it in `main.py`?
+
+The `runpy` package provides the ability to run modules from a module (Python script).
+
+[main.py](./main.py)
+
+```python
+import runpy
+
+
+def main():
+    # import a package, and pass all current global variables to it
+    appy_package = runpy.run_module(mod_name="appy", init_globals=globals())
+    appy_package['message'].script_path(__file__) #
+    appy_package['main']()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+### What's `globals()`?
+
+The official definition from the [docs](https://docs.python.org/3/library/functions.html#globals)
+
+> Return a dictionary representing the current global symbol table. This is always the dictionary of the current module (inside a function or method, this is the module where it is defined, not the module from which it is called).
+
+Check it out
+
+```bash
+meirgabay@~/python-project (master)$ python
+Python 3.8.2 (default, Jun 30 2020, 19:04:41)
+[Clang 11.0.3 (clang-1103.0.32.59)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>}
+>>> exit()
+```
+
+### Why do you have a weird path with `pyenv` when you run Python?
+
+In some of the examples you might have seen that my Python binary is located in
+
+```
+/Users/meirgabay/.pyenv/versions/3.8.2/Python.framework/Versions/3.8/bin/python
+```
+
+This is because I'm using [pyenv](https://github.com/pyenv/pyenv), the official definition from the docs
+
+> pyenv lets you easily **switch between multiple versions of Python**. It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
+
+- pyenv great for checking backwards compatibility
+
+- Switching to a different version
+
+  1. Install relevant version - `pyenv install 3.7.7`
+  2. Run `export PYENV_VERSION=3.7.7`
+
+- For a day to day use
+
+  1. Install relevant version - `pyenv install 3.8.2`
+  2. Add `export PYENV_VERSION=3.8.2` to your terminal's `rc` or `_profile` (`$HOME/.bashrc`, `$HOME/.bash_profile`, `$HOME/.zshrc`)
+
+<details><summary>Examples - Expand/Collapse
+
+</summary>
+
+```bash
+meirgabay@~/python-project (master)$ export PYENV_VERSION=
+meirgabay@~/python-project (master)$ pyenv versions
+* system (set by /Users/meirgabay/.pyenv/version) # default OS Python
+  3.7.7
+  3.8.2
+meirgabay@~/python-project (master)$ python --version
+Python 2.7.16
+
+# switching to a different version
+meirgabay@~/python-project (master)$ export PYENV_VERSION=3.7.7
+meirgabay@~/python-project (master)$ python --version
+Python 3.7.7
+
+# day to day use
+meirgabay@~/python-project (master)$ source ~/.bash_profile
+meirgabay@~/python-project (master)$ python --version
+Python 3.8.2
+```
+
+</details>
 
 ### Is there a good framework for creating a Python CLI?
 
