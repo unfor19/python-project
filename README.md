@@ -76,10 +76,10 @@ Executing modules from the project's root directory (top-level package)
 
 ### Why do relative imports raise a problem in pylint?
 
+The error - `Attempted relative import beyond top-level packagepylint(relative-beyond-top-level)`
+
 - Short answer - **I don't know**
 - All I can say is that it doesn't happen with [flake8](https://flake8.pycqa.org/en/latest/)
-
-`Attempted relative import beyond top-level packagepylint(relative-beyond-top-level)`
 
 ### Is it possible to invoke a function from the terminal?
 
@@ -164,7 +164,11 @@ import runpy
 def main():
     # import a package, and pass all current global variables to it
     appy_package = runpy.run_module(mod_name="appy", init_globals=globals())
-    appy_package['message'].script_path(__file__) #
+
+    # import the function script_path() from the submodule message, and execute it
+    appy_package['message'].script_path(__file__)
+
+    # execute the function main(), which is located in appy/__main__.py
     appy_package['main']()
 
 
@@ -178,7 +182,9 @@ The official definition from the [docs](https://docs.python.org/3/library/functi
 
 > Return a dictionary representing the current global symbol table. This is always the dictionary of the current module (inside a function or method, this is the module where it is defined, not the module from which it is called).
 
-Check it out
+<details><summary>Example - Expand/Collapse
+
+</summary>
 
 ```bash
 meirgabay@~/python-project (master)$ python
@@ -187,8 +193,9 @@ Python 3.8.2 (default, Jun 30 2020, 19:04:41)
 Type "help", "copyright", "credits" or "license" for more information.
 >>> globals()
 {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>}
->>> exit()
 ```
+
+</details>
 
 ### Why do you have a weird path with `pyenv` when you run Python?
 
