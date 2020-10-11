@@ -1,6 +1,7 @@
 # generic
 .*
 !.*ignore*
+*.wiki
 
 # python
 *__pycache__
