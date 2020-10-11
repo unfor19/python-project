@@ -9,7 +9,7 @@ with open("version", "r") as fh:
 setup(
     author='Meir Gabay',
     author_email='unfor19@gmail.com',
-    name='unfor19-python-project',
+    name='unfor19-appy',
     license='MIT',
     long_description_content_type='text/markdown',
     description='Python project template',  # noqa: E501
