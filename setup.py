@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages  # noqa: 401
 
 with open("README.md", "r") as fh:
     readme = fh.read()
@@ -15,7 +15,8 @@ setup(
     description='Python project template',  # noqa: E501
     long_description=readme,
     version=f'{version}',
-    packages=find_packages(),
+    # packages=find_packages() # must add __init__.py to each package directory
+    packages=['appy', 'appy.core', 'appy.utils'],
     keywords='python project template',
     include_package_data=True,
     url='https://github.com/unfor19/python-project',

@@ -71,8 +71,23 @@ Executing modules from the project's root directory (top-level package)
 
 ### Do I need the \_\_init\_\_.py file?
 
-- Short answer - **no**
-- In previous versions of Python, you had to create the `__init__.py` file in each directory that you want to import as a package, they were called _regular packages_. From version 3.3+ it is not required anymore - [Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/), packages without an `__init__.py` file are called _namespace packages_.
+- Short answer - **it depends**
+- In previous versions of Python, you had to create the `__init__.py` file in each directory that you want to import as a package, they were called _regular packages_. From version 3.3+ it is not required anymore - [Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/), packages without an `__init__.py` file are called _namespace packages_
+- When creating a Python package with [setuptools](https://pypi.org/project/setuptools/), you'll need to add `__init__.py` to all of the `packages`, so the functions [find_packages](https://setuptools.readthedocs.io/en/latest/userguide/package_discovery.html?highlight=find_packages#using-find-or-find-packages) will be able to automatically import them. Read more about here in the docs - [Listing whole packages](https://docs.python.org/3/distutils/setupscript.html#listing-whole-packages)
+- An alternative for adding `__init__.py` file is to manually add the names of the packages that you want to include in `setup.py`. Finally the possible solutions for packaging -
+
+  Add `__init__.py` to each package directory, and use `find_packages()`
+
+  ```
+  packages=find_packages()
+  ```
+
+  **OR** manually declare the packages to include in [setup.py](./setup.py)
+  <br>I prefer this approach, it helps keeping the project clean from `__init__.py`, and the package management is solely managed in `setup.py`
+
+  ```
+  packages=['appy', 'appy.core', 'appy.utils']
+  ```
 
 ### Why do relative imports raise a problem in pylint?
 
