@@ -212,6 +212,48 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 </details>
 
+### How do I install this package?
+
+1. Clone this repository
+1. Install from source
+
+   ```
+   $ python setup.py install
+   ...
+   Finished processing dependencies for unfor19-python-project==0.0.1
+   ```
+
+### How do I run the package after installing it?
+
+- Run `appy` as a CLI
+
+  ```
+  meirgabay@~/python-project (master)$ appy
+  Insert your name: willy
+  Hello willy
+  ```
+
+- Run `appy` as a Python module
+
+  ```
+  meirgabay@~/python-project (master)$ python -m appy
+  My Path: .pyenv/versions/3.8.2/Python.framework/Versions/3.8/lib/python3.8/site-packages/unfor19_python_project-0.0.1-py3.8.egg/appy/__main__.py
+  Insert your name: willy
+  Hello willy
+  ```
+
+### How do I import the package after installing it?
+
+- Import `appy` as a package
+
+  ```
+  meirgabay@~/python-project (master)$ python
+  ...
+  >>> from appy.utils import message
+  >>> message.greet("willy")
+  Hello willy
+  ```
+
 ### Why do you have a weird path with `pyenv` when you run Python?
 
 In some of the examples you might have seen that my Python binary is located in
