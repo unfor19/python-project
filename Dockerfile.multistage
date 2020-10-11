@@ -1,0 +1,19 @@
+# Build
+ARG PYTHON_VERSION="3.9.0"
+FROM python:$PYTHON_VERSION-slim as build
+RUN pip install --no-cache-dir --only-binary :all: -U pip && \
+    pip install --no-cache-dir --only-binary :all: -U wheel setuptools check-wheel-contents
+WORKDIR /code/
+COPY . .
+RUN python setup.py bdist_wheel && \
+    find . -type f -name *.whl -exec check-wheel-contents {} \;
+
+
+# App
+ARG PYTHON_VERSION="3.9.0"
+FROM python:$PYTHON_VERSION-alpine3.12 as app
+RUN pip install --no-cache-dir --only-binary :all: -U pip
+WORKDIR /app/
+COPY --from=build /code/dist/ /app/
+RUN find . -type f -name *.whl -exec pip install --no-cache-dir {} \; -exec rm {} \;
+CMD ["appy"]

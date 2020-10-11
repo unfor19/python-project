@@ -1,7 +1,12 @@
+# generic
 .*
-*__pycache__
 !.*ignore*
 
+# python
+*__pycache__
+ENV/
+
+# setup
 build/
 dist/
 *.egg-info

@@ -31,6 +31,9 @@ setup(
         'twine==3.1.1',
         'docutils>=0.16'
     ],
+    install_requires=[
+        'requests>=2.24.0'
+    ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',

@@ -1,9 +1,21 @@
 import os
 from pathlib import Path
+from requests import request
 
 
-def greet(name):
-    print(f"Hello {name}")
+def get_fact():
+    req = request('get', 'https://catfact.ninja/fact')
+    try:
+        return req.json()['fact']
+    except Exception as e:
+        print(e)
+        exit()
+
+
+def greet(name: str):
+    fact = get_fact()
+    msg = f"\nHello {name.title()}, here's the cat fact of the day:\n{fact}\n"
+    print(msg)
 
 
 def script_path(file_object):
