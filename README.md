@@ -217,11 +217,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 1. Clone this repository
 1. Install from source
 
-   ```
-   $ python setup.py install
-   ...
-   Finished processing dependencies for unfor19-python-project==0.0.1
-   ```
+```
+meirgabay@~/python-project (master)$ pip install .
+Processing /Users/meirgabay/python-project
+Building wheels for collected packages: unfor19-python-project
+...
+Successfully installed unfor19-python-project-0.0.1
+```
 
 ### How do I run the package after installing it?
 
@@ -242,7 +244,7 @@ Type "help", "copyright", "credits" or "license" for more information.
   Hello willy
   ```
 
-### How do I import the package after installing it?
+### How do I import this package after installing it?
 
 - Import `appy` as a package
 
@@ -253,6 +255,16 @@ Type "help", "copyright", "credits" or "license" for more information.
   >>> message.greet("willy")
   Hello willy
   ```
+
+### How do I remove/uninstall this package after installing it?
+
+```
+meirgabay@~/python-project (master)$ pip uninstall -y unfor19-python-project
+
+Found existing installation: unfor19-python-project 0.0.1
+Uninstalling unfor19-python-project-0.0.1:
+  Successfully uninstalled unfor19-python-project-0.0.1
+```
 
 ### Why do you have a weird path with `pyenv` when you run Python?
 
