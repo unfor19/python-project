@@ -4,6 +4,6 @@ RUN pip install --no-cache-dir --only-binary :all: -U pip && \
 WORKDIR /code/
 COPY . .
 RUN python setup.py bdist_wheel && \
-    find . -type f -name *.whl -exec pip install --no-cache-dir {} \; && \
+    find dist/ -type f -name *.whl -exec pip install --no-cache-dir {} \; && \
     rm -rf *
 CMD ["appy"]
