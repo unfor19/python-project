@@ -27,9 +27,7 @@ setup(
     ''',
     setup_requires=[
         'setuptools>=44.1.0',
-        'wheel>=0.34.2',
-        'twine==3.1.1',
-        'docutils>=0.16'
+        'wheel>=0.34.2'
     ],
     install_requires=[
         'requests>=2.24.0'
