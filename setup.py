@@ -6,6 +6,9 @@ with open("README.md", "r") as fh:
 with open("version", "r") as fh:
     version = fh.read()
 
+with open("appy/__init__.py", "w") as fh:
+    fh.write(f"__version__ = '{version}'")
+
 setup(
     author='Meir Gabay',
     author_email='unfor19@gmail.com',

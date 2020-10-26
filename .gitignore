@@ -11,3 +11,4 @@ ENV/
 build/
 dist/
 *.egg-info
+appy/__init__.py
