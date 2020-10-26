@@ -2,6 +2,7 @@
 .*
 !.*ignore*
 *.wiki
+!.github
 
 # python
 *__pycache__
@@ -11,4 +12,3 @@ ENV/
 build/
 dist/
 *.egg-info
-appy/__init__.py
