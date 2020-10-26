@@ -32,9 +32,8 @@ jobs:
           TWINE_NON_INTERACTIVE: true
           RELEASE_REF: ${{ github.ref }}
         run: |
-          RELEASE=0.0.1
           RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
-          echo -n $RELEASE_VERSION > ./version
+          [[ $RELEASE_VERSION = *.*.* ]] && echo -n $RELEASE_VERSION > ./version
           python setup.py sdist bdist_wheel
           twine check ./dist/*
           twine upload dist/*
