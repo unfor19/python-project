@@ -1,6 +1,7 @@
 # Build
 ARG PYTHON_VERSION="3.9.0"
 FROM python:$PYTHON_VERSION-slim as build
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 RUN pip install --no-cache-dir --only-binary :all: -U pip && \
     pip install --no-cache-dir --only-binary :all: -U wheel setuptools check-wheel-contents
 WORKDIR /code/
@@ -12,6 +13,7 @@ CMD ["bash"]
 # App
 ARG PYTHON_VERSION="3.9.0"
 FROM python:$PYTHON_VERSION-alpine3.12 as app
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 RUN pip install --no-cache-dir --only-binary :all: -U pip
 WORKDIR /app/
 COPY --from=build /code/dist/ /app/
