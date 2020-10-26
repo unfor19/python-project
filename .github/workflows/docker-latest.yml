@@ -8,7 +8,6 @@ on:
 
 jobs:
   dockerhub-latest:
-    needs: [test-ubuntu, test-macos, test-wsl]
     runs-on: ubuntu-latest
     env:
         PIP_NO_CACHE_DIR: 0
@@ -29,7 +28,7 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Build and Push to DockerHub
         run: |
-          DOCKER_TAG="unfor19/appy:latest"
+          export DOCKER_TAG="unfor19/appy:latest"
           docker build . --file Dockerfile.multistage --tag "${DOCKER_TAG}"
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push "${DOCKER_TAG}"
