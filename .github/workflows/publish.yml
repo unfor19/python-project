@@ -36,4 +36,4 @@ jobs:
           [[ $RELEASE_VERSION = *.*.* ]] && echo -n $RELEASE_VERSION > ./version
           python setup.py sdist bdist_wheel
           twine check ./dist/*
-          twine upload dist/*
+          [[ $RELEASE_VERSION = *.*.* ]] && twine upload dist/*
