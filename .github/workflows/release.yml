@@ -60,7 +60,7 @@ jobs:
       - name: Build and Push to DockerHub
         run: |
           RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
-          [[ ! $RELEASE_VERSION = *.*.* ]] && exit 0
+          [[ ! $RELEASE_VERSION =~ *.*.* ]] && exit 0
           export DOCKER_TAG="unfor19/appy:${RELEASE_VERSION}"
           docker build . --file Dockerfile.multistage --tag "${DOCKER_TAG}"
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
