@@ -1,5 +1,5 @@
 from unittest import TestCase
-from appy.utils import message
+from src.appy.utils import message
 
 
 class ApiTestCase(TestCase):

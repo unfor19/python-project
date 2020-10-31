@@ -1,6 +1,6 @@
 from unittest import TestCase, mock
 from io import StringIO
-from appy.core import app
+from src.appy.core import app
 
 
 class GreetTestCase(TestCase):
