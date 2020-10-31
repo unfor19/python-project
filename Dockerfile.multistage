@@ -6,7 +6,7 @@ ENV PIP_NO_CACHE_DIR=0
 
 # Upgrade pip and then install build tools
 RUN pip install -U pip && \
-    pip install -U wheel setuptools check-wheel-contents
+    pip install -U wheel setuptools wheel check-wheel-contents
 
 WORKDIR /code/
 
@@ -31,14 +31,15 @@ ENV HOME="$PWD"
 ENV PATH="/app/.local/bin:${PATH}"
 
 # Install OS requirements
-# RUN apk add --no-cache jpeg-dev zlib-dev
+RUN apk add --no-cache jpeg-dev zlib-dev
 
 # Run as a non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup -s sh --gecos "" --disabled-password --home "$PWD"
 USER appuser
 
 # Upgrade pip
-RUN pip install -U pip
+RUN pip install -U pip && \
+    pip install -U wheel setuptools wheel
 
 # Copy artifacts and requirements.txt from Build Stage
 COPY --from=build /code/requirements.txt /code/dist/ ./
