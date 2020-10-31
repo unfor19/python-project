@@ -12,3 +12,6 @@ ENV/
 build/
 dist/
 *.egg-info
+
+# output
+meirg-ascii.txt
