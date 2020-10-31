@@ -39,7 +39,7 @@ USER appuser
 
 # Upgrade pip
 RUN pip install -U pip && \
-    pip install -U wheel setuptools wheel
+    pip install -U wheel setuptools
 
 # Copy artifacts and requirements.txt from Build Stage
 COPY --from=build /code/requirements.txt /code/dist/ ./
