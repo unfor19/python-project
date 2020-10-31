@@ -1,0 +1,2 @@
+graft appy
+global-exclude *.py[cod] __pycache__
