@@ -41,6 +41,7 @@ RUN pip install -U pip
 COPY --from=build /code/requirements.txt /code/dist/ ./
 
 # Install requirements
+RUN jpeg-dev zlib-dev
 RUN pip install -r requirements.txt && \
     rm requirements.txt
 
