@@ -31,7 +31,7 @@ ENV HOME="$PWD"
 ENV PATH="/app/.local/bin:${PATH}"
 
 # Install OS requirements
-RUN apk add --no-cache jpeg-dev zlib-dev
+RUN apk add --no-cache py3-pillow
 
 # Run as a non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup -s sh --gecos "" --disabled-password --home "$PWD"
