@@ -6,7 +6,7 @@ except ImportError:
     # Try backported to Python Version < 3.7 `importlib_resources`.
     import importlib_resources as pkg_resources  # noqa: 401
 
-from .. import assets  # relative-import the *package* containing the data files
+from .. import assets  # relative-import the *package* containing the data files # noqa: 501
 from PIL import Image
 
 
@@ -52,6 +52,6 @@ def main(image_filename, output_filename):
     # Get output file full path
     cwd = os.getcwd()
     output_absolute_path = os.path.join(cwd, output_filename)
-    
+
     img_to_ascii(image_absolute_path, output_absolute_path)
     print(f"Created the file: {output_absolute_path}")
