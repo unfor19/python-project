@@ -12,5 +12,5 @@ with open(path.join(getcwd(), 'src', 'appy', '__init__.py'), "w") as fh:
 
 setup(
     version=f'{version}',
-    download_url=f'https://github.com/unfor19/python-project/archive/v{version}.tar.gz',  # noqa: E501
+    download_url=f'https://github.com/unfor19/python-project/archive/{version}.tar.gz',  # noqa: E501
 )
