@@ -1,6 +1,7 @@
 #!/bin/bash
 _RELEASE_VERSION=${RELEASE_VERSION:-$1}
 _VERBOSE=${VERSION_VALIDATION_VERBOSE:-"true"}
+_EXIT_ON_FAIL=${EXIT_ON_FAIL:-"true"}
 
 msg_error(){
     local msg="$1"
@@ -19,6 +20,10 @@ if [[ $_RELEASE_VERSION =~ ^[0-9]{1,}(\.[0-9]*)*(\.(a|b|rc)[0-9]{1,}|(\.post[0-9
     msg_log "Passed - Release version is valid"
     echo "$_RELEASE_VERSION"
 else
-    msg_log "Failed - Release version is invalid"
-    echo ""
+    if [[ $_EXIT_ON_FAIL = "true" ]]; then
+        msg_error "Failed - Release version is invalid"
+    else
+        msg_log "Failed - Release version is invalid"
+        echo ""
+    fi
 fi
