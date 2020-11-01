@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - "README.md"
       - ".github/workflows/release.yml"
+      - "scripts/version_validation.sh"
 
 jobs:
   dockerhub-latest:
