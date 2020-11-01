@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 with open("version", "r") as fh:
     version = fh.read()
 
-with open(path.join(getcwd(), 'src', PACKAGE_DIR_NAME, '__init__.py'), "w") as fh:
+with open(path.join(getcwd(), 'src', PACKAGE_DIR_NAME, '__init__.py'), "w") as fh:  # noqa: E501
     fh.write(f"__version__ = '{version}'\n")
 
 setup(
