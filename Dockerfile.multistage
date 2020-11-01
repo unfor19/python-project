@@ -21,7 +21,7 @@ CMD ["bash"]
 
 ## App Stage
 ARG PYTHON_VERSION="3.9.0"
-FROM python:$PYTHON_VERSION-alpine3.12 as app
+FROM python:$PYTHON_VERSION-slim as app
 
 WORKDIR /app/
 
