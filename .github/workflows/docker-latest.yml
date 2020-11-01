@@ -30,6 +30,7 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Build Docker Image
         run: |
+          echo -n 99.99.99 > ./version
           docker build . --file Dockerfile --tag "${DOCKER_TAG}"
       - name: Push to DockerHub
         run: |
