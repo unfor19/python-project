@@ -5,6 +5,8 @@ on:
     branches: [master]
     paths-ignore:
       - "README.md"
+      - ".github/workflows/release.yml"
+      - "scripts/version_validation.sh"
 
 jobs:
   dockerhub-latest:
@@ -28,8 +30,9 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Build Docker Image
         run: |
+          echo -n 99.99.99 > ./version
           docker build . --file Dockerfile --tag "${DOCKER_TAG}"
       - name: Push to DockerHub
         run: |
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push "${DOCKER_TAG}"
+          docker push "${DOCKER_TAG}" && echo "Pushed $DOCKER_TAG"
