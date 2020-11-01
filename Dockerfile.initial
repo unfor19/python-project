@@ -1,9 +1,0 @@
-FROM python:3.9.0-slim
-RUN pip install --no-cache-dir --only-binary :all: -U pip && \
-    pip install --no-cache-dir --only-binary :all: -U wheel setuptools
-WORKDIR /code/
-COPY . .
-RUN python setup.py bdist_wheel && \
-    find dist/ -type f -name *.whl -exec pip install --no-cache-dir {} \; && \
-    rm -rf *
-CMD ["appy"]

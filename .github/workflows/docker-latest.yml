@@ -10,8 +10,8 @@ jobs:
   dockerhub-latest:
     runs-on: ubuntu-latest
     env:
-        PIP_NO_CACHE_DIR: 0
-        DOCKER_TAG: unfor19/appy:latest
+      PIP_NO_CACHE_DIR: 0
+      DOCKER_TAG: unfor19/appy:latest
 
     steps:
       - uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
           python -m unittest discover -s tests -v
       - name: Build Docker Image
         run: |
-          docker build . --file Dockerfile.multistage --tag "${DOCKER_TAG}"
+          docker build . --file Dockerfile --tag "${DOCKER_TAG}"
       - name: Push to DockerHub
         run: |
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin

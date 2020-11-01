@@ -41,7 +41,6 @@ jobs:
           RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
           [[ $RELEASE_VERSION = *.*.* ]] && twine upload ./dist/* || true
 
-
   dockerhub:
     runs-on: ubuntu-latest
     steps:
@@ -62,6 +61,6 @@ jobs:
           RELEASE_VERSION=$(echo "$RELEASE_REF" | sed "s|refs\/tags\/v||g")
           [[ ! $RELEASE_VERSION =~ *.*.* ]] && exit 0
           export DOCKER_TAG="unfor19/appy:${RELEASE_VERSION}"
-          docker build . --file Dockerfile.multistage --tag "${DOCKER_TAG}"
+          docker build . --file Dockerfile --tag "${DOCKER_TAG}"
           echo '${{ secrets.DOCKER_PASSWORD }}' | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push "${DOCKER_TAG}"
