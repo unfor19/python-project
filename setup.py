@@ -7,9 +7,8 @@ with open("README.md", "r") as fh:
 with open("version", "r") as fh:
     version = fh.read()
 
-# with open(path.join(getcwd(), 'appy', '__init__.py'), "w") as fh:
-#     fh.write(f"__version__ = '{version}'")
-version = '0.0.1'
+with open(path.join(getcwd(), 'src', 'appy', '__init__.py'), "w") as fh:
+    fh.write(f"__version__ = '{version}'")
 
 setup(
     version=f'{version}',
