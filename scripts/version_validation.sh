@@ -17,11 +17,11 @@ msg_log(){
 }
 
 if [[ $_RELEASE_VERSION =~ ^[0-9]{1,}(\.[0-9]*)*(\.(a|b|rc)[0-9]{1,}|(\.post[0-9]{1,})|(\.dev[0-9]{1,})){0,1}$ ]]; then
-    msg_log "Passed - Release version is valid"
+    msg_log "Passed - Release version is valid - $_RELEASE_VERSION"
     echo "$_RELEASE_VERSION"
 else
     if [[ $_EXIT_ON_FAIL = "true" ]]; then
-        msg_error "Failed - Release version is invalid"
+        msg_error "Failed - Release version is invalid - $_RELEASE_VERSION"
     else
         msg_log "Failed - Release version is invalid"
         echo ""
