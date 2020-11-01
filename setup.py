@@ -2,7 +2,7 @@ from os import getcwd, path
 from setuptools import setup
 
 # Change accordingly ----------------------------
-PACKAGE_NAME = "appy"
+PACKAGE_DIR_NAME = "appy"
 GITHUB_OWNER = "unfor19"
 GITHUB_REPOSITORY = "python-project"
 # -----------------------------------------------
@@ -15,7 +15,7 @@ with open("README.md", "r") as fh:
 with open("version", "r") as fh:
     version = fh.read()
 
-with open(path.join(getcwd(), 'src', PACKAGE_NAME, '__init__.py'), "w") as fh:
+with open(path.join(getcwd(), 'src', PACKAGE_DIR_NAME, '__init__.py'), "w") as fh:
     fh.write(f"__version__ = '{version}'\n")
 
 setup(
