@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.9"
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v3.0.0          
+        uses: rlespinasse/github-slug-action@3.0.0          
       - name: Release Version
         run: |
           export RELEASE_VERSION=${GITHUB_REF_SLUG}
@@ -55,7 +55,7 @@ jobs:
         with:
           python-version: "3.9"
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v3.0.0          
+        uses: rlespinasse/github-slug-action@3.0.0          
       - name: Release Version
         run: |
           export RELEASE_VERSION=${GITHUB_REF_SLUG}
