@@ -23,15 +23,17 @@ CMD ["bash"]
 ARG PYTHON_VERSION="3.9.0"
 FROM python:$PYTHON_VERSION-slim as app
 
-WORKDIR /app/
+# Define workdir
+ENV HOME="/app"
+WORKDIR $HOME
 
+# Define env vars
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PIP_NO_CACHE_DIR=0
-ENV HOME="$PWD"
-ENV PATH="/app/.local/bin:${PATH}"
+ENV PATH="$HOME/.local/bin:${PATH}"
 
 # Run as a non-root user
-RUN addgroup appgroup && useradd appuser -g appgroup --home-dir "$PWD" && \
+RUN addgroup appgroup && useradd appuser -g appgroup --home-dir "$HOME" && \
     chown -R appuser:appgroup .
 USER appuser
 
