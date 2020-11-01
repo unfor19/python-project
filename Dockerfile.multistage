@@ -30,11 +30,9 @@ ENV PIP_NO_CACHE_DIR=0
 ENV HOME="$PWD"
 ENV PATH="/app/.local/bin:${PATH}"
 
-# Install OS requirements
-RUN apk add --no-cache py3-pillow
-
 # Run as a non-root user
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup -s sh --gecos "" --disabled-password --home "$PWD"
+RUN addgroup appgroup && useradd appuser -g appgroup --home-dir "$PWD" && \
+    chown -R appuser:appgroup .
 USER appuser
 
 # Upgrade pip
