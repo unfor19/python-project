@@ -5,14 +5,14 @@ _EXIT_ON_FAIL=${EXIT_ON_FAIL:-"true"}
 
 msg_error(){
     local msg="$1"
-    echo -e ">> [ERROR] $msg"
+    echo -e ">> [ERROR]: $msg"
     exit 1
 }
 
 msg_log(){
     local msg="$1"
     if [[ $_VERBOSE = "true" ]]; then
-        echo -e ">> [LOG] $msg"
+        echo -e ">> [LOG]: $msg"
     fi
 }
 
