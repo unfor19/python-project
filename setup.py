@@ -9,9 +9,6 @@ GITHUB_REPOSITORY = "python-project"
 
 
 # Keep the same structure, should NOT be changed
-with open("README.md", "r") as fh:
-    readme = fh.read()
-
 with open("version", "r") as fh:
     version = fh.read()
 
