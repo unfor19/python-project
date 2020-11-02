@@ -13,6 +13,7 @@ set -e
 _GITHUB_OWNER=${GITHUB_OWNER:-$1}
 _GITHUB_REPOSITORY=${GITHUB_REPOSITORY:-$2}
 _RELEASE_VERSION=${RELEASE_VERSION:-$3}
+_VERBOSE=${VERBOSE:-"true"}
 
 
 msg_error(){
@@ -20,6 +21,14 @@ msg_error(){
     local exit_code=${2:-1}
     echo -e ">> [ERROR]: $msg"
     exit "$exit_code"
+}
+
+
+msg_log(){
+    local msg="$1"
+    if [[ $_VERBOSE = "true" ]]; then
+        echo -e ">> [LOG]: $msg"
+    fi
 }
 
 
@@ -39,7 +48,9 @@ set +e
 read -r _EXIT_MSG < <(gh release create "$_RELEASE_VERSION" -t "$_RELEASE_VERSION" -R "${_GITHUB_OWNER}/${_GITHUB_REPOSITORY}")
 _EXIT_CODE=$?
 gh config set prompt enabled
-if [[ $_EXIT_CODE -ne 0 ]]; then
+if [[ $_EXIT_CODE -eq 0 ]]; then
+    msg_log "Created release ${_RELEASE_VERSION} for ${_GITHUB_OWNER}/${_GITHUB_REPOSITORY}"
+else
     [[ -z $_EXIT_MSG ]] && _EXIT_MSG="Error log above"
     msg_error "$_EXIT_MSG" "$_EXIT_CODE"
 fi
