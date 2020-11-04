@@ -1,4 +1,4 @@
-name: Push latest verion to DockerHub
+name: Push latest version to DockerHub
 
 on:
   push:
