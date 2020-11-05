@@ -17,8 +17,8 @@ msg_log(){
     fi
 }
 
-_CHECK_RELEASE_VERSION=$(echo "$_RELEASE_VERSION" | perl -ne 'print $1 if /^[0-9]{1,}(\.[0-9]*)*(\.[0-9]{1,}(a|b|rc)[0-9]{1,}|(\.post[0-9]{1,})|(\.dev[0-9]{1,})){0,1}(?<=[0-9]){1,}$/s')
-if [[ -n $_CHECK_RELEASE_VERSION ]]; then
+
+if [[ $_RELEASE_VERSION =~ ^[0-9]+(\.[0-9]*)*(\.[0-9]+(a|b|rc)|(\.post)|(\.dev))*[0-9]+$ ]]; then
     msg_log "Passed - Release version is valid - $_RELEASE_VERSION"
     echo "$_RELEASE_VERSION"
 else
