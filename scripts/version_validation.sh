@@ -18,9 +18,9 @@ set -e
 ###                     $ bash scripts/version_validation.sh 1.0.2rc1
 ###                     >> [LOG]: Passed - Release version is valid - 1.0.2rc1
 ###                     1.0.2rc1
-###               Error: Raises an error (exit code = 1)
-###               $ bash scripts/version_validation.sh 1.0.2rc
-###               >> [ERROR]: Failed - Release version is invalid - 1.0.2rc
+###              Error: Raises an error (exit code = 1)
+###                     $ bash scripts/version_validation.sh 1.0.2rc
+###                     >> [ERROR]: Failed - Release version is invalid - 1.0.2rc
 ### ---------------------------------------------------------------------------
 
 
