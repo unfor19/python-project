@@ -1,8 +1,9 @@
-## Build Stage
+### --------------------------------------------------------------------
+### Build Stage
+### --------------------------------------------------------------------
 ARG PYTHON_VERSION="3.9.0"
 FROM python:$PYTHON_VERSION-slim as build
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
-ENV PIP_NO_CACHE_DIR=0
 
 # Upgrade pip and then install build tools
 RUN pip install -U pip && \
@@ -19,8 +20,10 @@ RUN python setup.py bdist_wheel && \
 CMD ["bash"]
 
 
-## App Stage
-ARG PYTHON_VERSION="3.9.0"
+### --------------------------------------------------------------------
+### App Stage
+### --------------------------------------------------------------------
+ARG PYTHON_VERSION
 FROM python:$PYTHON_VERSION-slim as app
 
 # Define workdir
@@ -29,7 +32,6 @@ WORKDIR $HOME
 
 # Define env vars
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
-ENV PIP_NO_CACHE_DIR=0
 ENV PATH="$HOME/.local/bin:${PATH}"
 
 # Run as a non-root user
@@ -39,15 +41,18 @@ USER appuser
 
 # Upgrade pip
 RUN pip install -U pip && \
-    pip install -U wheel setuptools
-
-# Copy artifacts and requirements.txt from Build Stage
-COPY --from=build /code/requirements.txt /code/dist/ ./
+    pip install -U setuptools wheel
 
 # Install requirements
-RUN pip install -r requirements.txt && \
-    rm requirements.txt
+COPY --from=build --chown=appuser:appgroup /code/requirements.txt artifact/
+RUN pip install -r artifact/requirements.txt
+
+# Copy artifacts and requirements.txt from Build Stage
+COPY --from=build --chown=appuser:appgroup /code/dist/ artifact/
 
 # Install the application from local wheel package
-RUN find . -type f -name *.whl -exec pip install {} \; -exec rm {} \;
+RUN find . -type f -name *.whl -exec pip install {} \; -exec rm {} \; 
+# rm -r artifact/ .cache/pip/
+
 CMD ["appy"]
+### --------------------------------------------------------------------
