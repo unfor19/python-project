@@ -45,7 +45,8 @@ RUN pip install -U pip && \
 
 # Install requirements
 COPY --from=build --chown=appuser:appgroup /code/requirements.txt artifact/
-RUN pip install -r artifact/requirements.txt
+RUN pip install -r artifact/requirements.txt && \
+    rm -r $HOME/.cache/pip/
 
 # Copy artifacts and requirements.txt from Build Stage
 COPY --from=build --chown=appuser:appgroup /code/dist/ artifact/
