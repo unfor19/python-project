@@ -32,6 +32,7 @@ WORKDIR $HOME
 
 # Define env vars
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_CACHE_DIR=1
 ENV PATH="$HOME/.local/bin:${PATH}"
 
 # Run as a non-root user
@@ -45,8 +46,7 @@ RUN pip install -U pip && \
 
 # Install requirements
 COPY --from=build --chown=appuser:appgroup /code/requirements.txt artifact/
-RUN pip install -r artifact/requirements.txt && \
-    rm -r $HOME/.cache/pip/
+RUN pip install -r artifact/requirements.txt
 
 # Copy artifacts and requirements.txt from Build Stage
 COPY --from=build --chown=appuser:appgroup /code/dist/ artifact/
