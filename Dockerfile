@@ -3,13 +3,16 @@
 ### --------------------------------------------------------------------
 ARG PYTHON_VERSION="3.9.0"
 FROM python:$PYTHON_VERSION-slim as build
+
+# Define env vars
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Define workdir
+WORKDIR /code/
 
 # Upgrade pip and then install build tools
 RUN pip install -U pip && \
     pip install -U wheel setuptools wheel check-wheel-contents
-
-WORKDIR /code/
 
 # Build The Application and validate wheel contents
 COPY . .
@@ -40,7 +43,7 @@ RUN addgroup appgroup && useradd appuser -g appgroup --home-dir "$HOME" && \
     chown -R appuser:appgroup .
 USER appuser
 
-# Upgrade pip
+# Upgrade pip, setuptools and wheel
 RUN pip install -U pip && \
     pip install -U setuptools wheel
 
