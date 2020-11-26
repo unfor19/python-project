@@ -51,8 +51,8 @@ RUN pip install -r artifact/requirements.txt
 COPY --from=build --chown=appuser:appgroup /code/dist/ artifact/
 
 # Install the application from local wheel package
-RUN find . -type f -name *.whl -exec pip install {} \; -exec rm {} \; 
-# rm -r artifact/ .cache/pip/
+RUN find . -type f -name *.whl -exec pip install {} \; -exec rm {} \;  && \
+    rm -r artifact/
 
 CMD ["appy"]
 ### --------------------------------------------------------------------
